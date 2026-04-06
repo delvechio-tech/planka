@@ -71,6 +71,8 @@ export function* authenticateWithSso(email) {
   yield call(setAccessToken, accessToken);
   yield put(actions.authenticateWithSso.success(accessToken));
 }
+
+export function* authenticateWithOidcCallback() {
   // https://github.com/plankanban/planka/issues/511#issuecomment-1771385639
   const params = new URLSearchParams(window.location.hash.substring(1) || window.location.search);
 
@@ -213,6 +215,7 @@ export default {
   initializeLogin,
   authenticate,
   authenticateWithOidc,
+  authenticateWithSso,
   authenticateWithOidcCallback,
   clearAuthenticateError,
   acceptTerms,
