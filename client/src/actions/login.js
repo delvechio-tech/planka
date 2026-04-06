@@ -125,6 +125,27 @@ authenticateWithSso.failure = (error) => ({
   },
 });
 
+const updateTermsLanguage = (value) => ({
+  type: ActionTypes.TERMS_LANGUAGE_UPDATE,
+  payload: {
+    value,
+  },
+});
+
+updateTermsLanguage.success = (terms) => ({
+  type: ActionTypes.TERMS_LANGUAGE_UPDATE__SUCCESS,
+  payload: {
+    terms,
+  },
+});
+
+updateTermsLanguage.failure = (error) => ({
+  type: ActionTypes.TERMS_LANGUAGE_UPDATE__FAILURE,
+  payload: {
+    error,
+  },
+});
+
 export default {
   initializeLogin,
   authenticate,
