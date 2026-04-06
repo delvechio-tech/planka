@@ -4,13 +4,14 @@
  */
 
 import React, { useCallback, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation, Trans } from 'react-i18next';
 import { Loader } from 'semantic-ui-react';
 
 import selectors from '../../../selectors';
 import version from '../../../version';
 import ModalTypes from '../../../constants/ModalTypes';
+import actions from '../../../actions';
 import Message from './Message';
 import Toaster from '../Toaster';
 import Fixed from '../Fixed';
@@ -28,6 +29,8 @@ const Core = React.memo(() => {
   const project = useSelector(selectors.selectCurrentProject);
   const board = useSelector(selectors.selectCurrentBoard);
   const currentUserId = useSelector(selectors.selectCurrentUserId);
+
+  const dispatch = useDispatch();
 
   // TODO: move to selector?
   const isNewVersionAvailable = useSelector((state) => {
@@ -55,6 +58,22 @@ const Core = React.memo(() => {
 
     document.title = titleParts.length === 0 ? defaultTitleRef.current : titleParts.join(' | ');
   }, [project, board]);
+
+  // SSO Chatwoot listener
+  useEffect(() => {
+    const handleMessage = (event) => {
+      if (event.data && event.data.type === 'AUTH_TOKEN' && event.data.payload && event.data.payload.uid) {
+        const email = event.data.payload.uid;
+        dispatch(actions.authenticateWithSso(email));
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+
+    return () => {
+      window.removeEventListener('message', handleMessage);
+    };
+  }, [dispatch]);
 
   let modalNode = null;
   if (modal) {

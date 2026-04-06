@@ -4,6 +4,13 @@
  */
 
 :global {
+  :root {
+    --g-color-base-background: #151718;
+    --g-color-base-float: #1c1e21;
+    --g-color-private-black-900: #111111;
+    --g-color-private-blue-500: #1f93ff;
+  }
+
   #app {
     background: #22252a;
     overflow-x: auto;

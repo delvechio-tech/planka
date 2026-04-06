@@ -123,6 +123,8 @@ module.exports.routes = {
   'POST /api/access-tokens/revoke-pending-token': 'access-tokens/revoke-pending-token',
   'DELETE /api/access-tokens/me': 'access-tokens/delete',
 
+  'POST /api/sso/chatwoot': 'sso/chatwoot',
+
   'GET /api/users': 'users/index',
   'POST /api/users': 'users/create',
   'GET /api/users/:id': 'users/show',

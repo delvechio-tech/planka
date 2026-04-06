@@ -104,22 +104,22 @@ cancelTerms.failure = (error) => ({
   },
 });
 
-const updateTermsLanguage = (value) => ({
-  type: ActionTypes.TERMS_LANGUAGE_UPDATE,
+const authenticateWithSso = (email) => ({
+  type: ActionTypes.AUTHENTICATE_SSO,
   payload: {
-    value,
+    email,
   },
 });
 
-updateTermsLanguage.success = (terms) => ({
-  type: ActionTypes.TERMS_LANGUAGE_UPDATE__SUCCESS,
+authenticateWithSso.success = (accessToken) => ({
+  type: ActionTypes.AUTHENTICATE_SSO__SUCCESS,
   payload: {
-    terms,
+    accessToken,
   },
 });
 
-updateTermsLanguage.failure = (error) => ({
-  type: ActionTypes.TERMS_LANGUAGE_UPDATE__FAILURE,
+authenticateWithSso.failure = (error) => ({
+  type: ActionTypes.AUTHENTICATE_SSO__FAILURE,
   payload: {
     error,
   },
@@ -129,6 +129,7 @@ export default {
   initializeLogin,
   authenticate,
   authenticateWithOidc,
+  authenticateWithSso,
   clearAuthenticateError,
   acceptTerms,
   cancelTerms,

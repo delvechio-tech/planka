@@ -14,6 +14,9 @@ export default function* loginWatchers() {
       services.authenticate(data),
     ),
     takeEvery(EntryActionTypes.WITH_OIDC_AUTHENTICATE, () => services.authenticateWithOidc()),
+    takeEvery(EntryActionTypes.AUTHENTICATE_SSO, ({ payload: { email } }) =>
+      services.authenticateWithSso(email),
+    ),
     takeEvery(EntryActionTypes.AUTHENTICATE_ERROR_CLEAR, () => services.clearAuthenticateError()),
     takeEvery(EntryActionTypes.TERMS_ACCEPT, ({ payload: { signature } }) =>
       services.acceptTerms(signature),

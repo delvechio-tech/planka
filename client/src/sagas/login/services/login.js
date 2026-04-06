@@ -57,7 +57,20 @@ export function* authenticateWithOidc() {
   window.location.href = redirectUrl;
 }
 
-export function* authenticateWithOidcCallback() {
+export function* authenticateWithSso(email) {
+  yield put(actions.authenticateWithSso(email));
+
+  let accessToken;
+  try {
+    ({ item: accessToken } = yield call(api.authenticateWithSso, { email }));
+  } catch (error) {
+    yield put(actions.authenticateWithSso.failure(error));
+    return;
+  }
+
+  yield call(setAccessToken, accessToken);
+  yield put(actions.authenticateWithSso.success(accessToken));
+}
   // https://github.com/plankanban/planka/issues/511#issuecomment-1771385639
   const params = new URLSearchParams(window.location.hash.substring(1) || window.location.search);
 

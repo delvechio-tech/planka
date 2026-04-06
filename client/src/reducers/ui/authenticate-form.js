@@ -50,6 +50,7 @@ export default (state = initialState, { type, payload }) => {
       };
     case ActionTypes.AUTHENTICATE__SUCCESS:
     case ActionTypes.WITH_OIDC_AUTHENTICATE__SUCCESS:
+    case ActionTypes.AUTHENTICATE_SSO__SUCCESS:
     case ActionTypes.TERMS_ACCEPT__SUCCESS:
     case ActionTypes.TERMS_CANCEL__SUCCESS:
     case ActionTypes.TERMS_CANCEL__FAILURE:
